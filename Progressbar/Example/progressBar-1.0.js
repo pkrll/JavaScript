@@ -23,7 +23,7 @@
 		if (this instanceof ProgressBar) {
 			// Sets the complete callback function
 			// to either user defined or default.
-			this.onComplete = onComplete || this.onCompleteDefault();
+			this.onComplete = onComplete || this.onComplete;
 			// The default settings can be changed
 			// either when the creating the object
 			// or by calling the set-functions.
@@ -90,8 +90,8 @@
 			}
 		},
 		// The callback function on done
-		onCompleteDefault: function () {
-			this.progressBar.html("Done!");
+		onComplete: function () {
+			this.setLabel("Done!");
 		},
 		// Error handling
 		createErrorMessage: function (errorMessage) {
