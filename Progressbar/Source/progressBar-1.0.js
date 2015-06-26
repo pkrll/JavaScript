@@ -3,8 +3,8 @@
  * Progress bar 1.0
  *
  * A simple Javascript plugin for implementing a
- * HTML5 progress bar element that will display 
- * the progress of tasks like uploads, downloads 
+ * HTML5 progress bar element that will display
+ * the progress of tasks like uploads, downloads
  * and other functions involving progress.
  *
  * @version 1.0
@@ -12,7 +12,7 @@
  */
 (function($) {
 	/**
-	 * Initialize the ProgressBar object 
+	 * Initialize the ProgressBar object
 	 * with option to change the default
 	 * settings such as color of bar and
 	 * the parent.
@@ -95,11 +95,13 @@
 		},
 		// Error handling
 		createErrorMessage: function (errorMessage) {
-			var errorMessageElement = $("<div>").attr({"id": "errorMessage"}).html(errorMessage).appendTo($("body"));
+			var errorMessageElement = $("<div>").attr({
+				"id": "errorMessage"
+				}).html(errorMessage).appendTo($("body"));
 			errorMessageElement.click(function() {
 				$(this).remove();
 			});
-			
+
 			return false;
 		}
 	};
