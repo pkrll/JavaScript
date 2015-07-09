@@ -1,0 +1,66 @@
+.tooltip-container {
+    position:relative;
+    width:100%;
+}
+
+.tooltip-active input, textarea, select {
+    box-shadow: 0 0 8px #de1212;
+    outline:none;
+}
+
+.error-label-container {
+    display:inline-table;
+    left:0%;
+    margin-left:5px;
+    position:absolute;
+    top:100%;
+    z-index:99;
+}
+
+.error-label-arrow-top {
+	width: 0;
+	height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+	border-bottom:12px solid #de1212;
+    vertical-align: top;
+    margin:auto;
+}
+
+.error-label-arrow-bottom {
+	width: 0;
+	height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+	border-top:12px solid #de1212;
+    vertical-align: top;
+    margin:auto;
+}
+
+.error-label-arrow-right {
+	width: 0;
+	height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+	border-left:12px solid #de1212;
+    vertical-align: top;
+    margin:auto;
+}
+
+.error-label-arrow-left {
+	width: 0;
+	height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+	border-right:12px solid #de1212;
+    vertical-align: top;
+    margin:auto;
+}
+
+.error-label {
+    background:#de1212;
+    color: #FFFFFF;
+    padding:8px;
+    width:auto;
+    cursor:pointer;
+}
