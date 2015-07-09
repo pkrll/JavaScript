@@ -1,6 +1,6 @@
 ## Tooltip
 A simple jQuery plugin to add small tooltips below HTML form elements.
-![Screenshot](https://github.com/pkrll/JavaScript/blob/master/tooltip.png)
+
 #### Usage
 * Create container div elements for each and every one of the form elements that are to be subject to the Tooltip plugin, with the class "tooltip-container":
 ```html
@@ -29,6 +29,7 @@ Tooltip({
    "element": $(element) // Required: The tooltip-container
 }, true|false); // A true value will remove all tooltips on screen when executing
 ```
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Tooltip/tooltip10.png)
 ### Example usage
 See the example folder for an example on how to use it.
 ### More to come
