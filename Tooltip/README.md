@@ -17,8 +17,8 @@ A simple jQuery plugin to add small tooltips below HTML form elements.
 * Call the plugin:
 ```js
 var tooltip = new Tooltip({
-   "label": "Please fill out this field", // Required
-   "element": $(element) // Required: The tooltip-container
+   "label": "Please fill out this field",
+   "element": $(element)
 }, true);
 ```
 #### Options
