@@ -17,8 +17,8 @@
         this.settings = $.extend({
             "url"               : false,
             "consecutiveLimit"  : false,
-            "loaderImagePath"   : "/public/images/system/loading-128.png",
-            "extensions"        : ["jpg", "jpeg", "gif"],
+            "loaderImagePath"   : "loading-128.png",
+            "extensions"        : ["jpg", "jpeg", "gif", "png"],
             "onDownload"        : false,
             "onUpload"          : false,
             "onReady"           : false,
