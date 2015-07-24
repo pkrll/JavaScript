@@ -34,3 +34,5 @@ Tooltip({
 See the example folder for an example on how to use it.
 ### More to come
 This is a work in progress.
+### Author
+* Tooltip was created by Ardalan Samimi.
