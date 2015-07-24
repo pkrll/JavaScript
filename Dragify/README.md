@@ -36,4 +36,4 @@ $(".dragAndDropElement").dropify({
 });
 ```
 ### Author
-Dragify was created by Ardalan Samimi.
+* Dragify was created by Ardalan Samimi.
