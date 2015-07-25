@@ -26,15 +26,100 @@ $(".dragAndDropElement").dropify({
 #### Options
 ```js
 .dropify({
-   "url"                : "/path/to/server/upload/", // The request URL (required)
-   "consecutiveLimit"   : 2, // Limits number of files to upload at once (optional)
-   "loaderImagePath"    : "/path/to/image.png", // Sets the loader icon (optional)
-   "extensions"         : ["jpg", "jpeg", "gif", "png"], // Extensions that are allowed to upload (optional)
-   "onDownload"         : false // Overrides the default function called upon xhr.onprogress (optional)
-   "onUpload"           : false // Overrides the default function called upon xhr.upload.onprogress (optional)
-   "onReady"            : false // Overrides the default function called upon completion (optional)
-   "onError"            : false // Overrides the default function called upon error (optional)
-});
+       "url"                : "/path/to/server/upload/",
+       "consecutiveLimit"   : 2,
+       "loaderImagePath"    : "/path/to/image.png",
+       "extensions"         : ["jpg", "jpeg", "gif", "png"],
+       "onDownload"         : false,
+       "onUpload"           : false,
+       "onReady"            : false,
+       "onError"            : false
+    });
+```
+* `url`: The request URL path (**required**).
+* `consecutiveLimit`: Limits the number of files that will be uploaded at once.
+* `loaderImagePath`: Path to the loader image. Will be displayed if the default progress dialog is used.
+* `extensions`: List of of allowed extension. Files with any other extensions will not be uploaded.
+* `onDownload`: Overrides the xhr.onprogress event, and is passed a progressEvent object.
+* `onUpload`: Overrides the xhr.upload.onprogress event, and is passed a progressEvent object.
+* `onReady`: Overrides the onreadystatechange event. Will be called only if the readyState is 4 (request finished and response is ready). This function is passed the responseText property of the XMLHttpRequest object and will be in charge of parsing the server response.
+
+#### Customization
+* Dropify's default progress monitoring can easily be overridden and tailored to fit your exact needs. Below follows an example, where the [ProgressBar plugin](https://github.com/pkrll/JavaScript/tree/master/Progressbar) is used instead of the default dialog window.
+```js
+    /**
+     * Add the Dropify plugin to the element with
+     * id targetArea, with customized settings.
+     */
+    $("#targetArea").dropify({
+       url: "/upload/image",
+       onUpload: $.fn.onUpload,
+       onDownload: $.fn.onDownload,
+       onReady: function (response) {
+         // Remove the progressbar
+         // and parse the response.
+         this.monitor.remove();
+         var parsedResponse = jQuery.parseJSON(response);
+         console.log(parsedResponse);
+       }
+    });
+
+    /**
+     * Override Dropify's default onUpload function.
+     *
+     * @param   progressEvent
+     */
+    $.fn.onUpload = function (event) {
+        // Keyword "this" gives access to the
+        // plugins settings variables, where
+        // the progressbar element can be stored
+        // inside the variable monitor.
+        var self = this;
+        // Create the progress bar object, and
+        // connect it to the Dropify plugin, if
+        // it already does not exist. But keep it
+        // inside a conditional statement, so that
+        // we do not create loads of progress bars.
+        if ($("#progress-bar-container").length < 1) {
+            var element = $("<div>").attr({
+                "id": "progress-bar-container"
+            }).appendTo("body");
+            self.monitor = new ProgressBar ({ parentElement: element });
+            self.monitor.createBar();
+        }
+        // Calculate upload progress
+        var completed = 0;
+        if (event.lengthComputable) {
+            // The uploading process is only
+            // part one of the whole process,
+            // that also includes resizing of
+            // images. Therefore, divide this
+            // status by two.
+            completed = Math.round((event.loaded / event.total * 1000) / 10 / 2);
+            self.monitor.setProgress(completed);
+        }
+    }
+
+    /**
+     * Override Dropify's default function onDownload function,
+     * for when the server sends information back.
+     *
+     * @param   progressEvent
+     */
+    $.fn.onDownload = function (event) {
+        // onDownload will monitor the response from the server,
+        // for example if the server is streaming information
+        // back in real time.
+        var currentLoad     = 0;
+        var totalSizeToLoad = this.totalSizeToLoad;
+        var response        = event.currentTarget.response;
+        var contents        = response.substring(previousBuffer.length);
+        var currentProgress = this.monitor.getProgress();
+        // Calculate the progress
+        var completed = (Math.round((++currentLoad / totalSizeToLoad * 1000) / 10 / 2) + currentProgress);
+        // Set the new status of the progress bar
+        this.monitor.setProgress(completed);
+    }
 ```
 ### Author
 * Dropify was created by Ardalan Samimi.

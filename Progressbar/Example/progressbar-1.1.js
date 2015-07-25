@@ -1,41 +1,48 @@
-/*
+/**
  * Javascript plugin
- * Progress bar 1.0
+ * Progress bar 1.1
  *
  * A simple Javascript plugin for implementing a
  * HTML5 progress bar element that will display
  * the progress of tasks like uploads, downloads
  * and other functions involving progress.
  *
- * @version 1.0
+ * @version 1.1
  * @author Ardalan Samimi
  */
 (function($) {
-	/**
-	 * Initialize the ProgressBar object
-	 * with option to change the default
-	 * settings such as color of bar and
-	 * the parent.
-	 */
+
+    /**
+    * Initialize the ProgressBar object
+    * with option to change the default
+    * settings such as color of bar and
+    * the parent.
+    *
+    * @param Object Settings parameters
+    * @param Function A callback function
+    * @returns
+    */
 	ProgressBar = function (settings, onComplete) {
 		// Auto-instantiates if the object was
 		// not called with the new-keyword.
 		if (this instanceof ProgressBar) {
 			// Sets the complete callback function
 			// to either user defined or default.
-			this.onComplete = onComplete || this.onCompleteDefault();
+			this.onComplete = onComplete || this.onCompleteDefault;
+			this.progress = 0;
 			// The default settings can be changed
 			// either when the creating the object
 			// or by calling the set-functions.
 			this.settings = $.extend({
 				"color": '#0F0',
-				"parentElement": false
+				"parentElement": false,
+				"name": false
 			}, settings || {});
 			// Create the bar if a parent
 			// element is set.
-			if (this.settings.parentElement !== null) {
-				this.createBar();
-			};
+			// if (this.settings.parentElement !== false) {
+			// 	this.createBar();
+			// };
 		} else {
 			return new ProgressBar (settings);
 		}
@@ -64,8 +71,9 @@
 				"max": 100
 			}).appendTo(this.settings.parentElement);
 			this.progressLabel = $("<div>").attr({
-				"id": "progress-bar-label"
+				"class": "progress-bar-label"
 			}).html("0%").appendTo(this.settings.parentElement);
+			var div = $("<div>").html(this.settings.name).appendTo(this.settings.parentElement);
 		},
 		// Animates the progress bar
 		setProgress: function (progress) {
@@ -75,6 +83,7 @@
 			}, 1, function() {
 				_this.onProgress(progress);
 			});
+			this.progress = progress;
 		},
 		// Sets the text of the bar
 		setLabel: function (text) {
@@ -91,9 +100,18 @@
 		},
 		// The callback function on done
 		onCompleteDefault: function () {
-			this.progressBar.html("Done!");
+			this.setLabel("Done!");
+		},
+		getProgress: function () {
+			return this.progress;
 		},
 		// Error handling
+		// onError: function () {
+		// 	this.
+		// }
+		remove: function () {
+			this.settings.parentElement.remove();
+		},
 		createErrorMessage: function (errorMessage) {
 			var errorMessageElement = $("<div>").attr({
 				"id": "errorMessage"

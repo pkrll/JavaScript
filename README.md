@@ -9,6 +9,8 @@ Add drag and drop-functionality to your HTML elements. The Dropify plugin also e
 ### ProgressBar.js
 Create HTML5 progress bar elements with the ProgressBar plugin, that will display the progress of tasks like uploads, downloads and other functions involving progress.
 
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Progressbar/progressbar.png)
+
 ### Tooltip.js
 Create simple tooltips below HTML form elements.
 

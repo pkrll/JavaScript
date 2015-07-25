@@ -2,7 +2,7 @@
  * Javascript plugin
  * Dropify 1.1
  *
- * Ads drag and drop functionality to an HTML element,
+ * Adds drag and drop functionality to an HTML element,
  * and uploading files to the server.
  *
  * @version 1.1
@@ -13,7 +13,7 @@
     var Dropify = function (element, options) {
         this.element    = $(element);
         // Set the options
-        this.settings = $.extend({
+        this.settings   = $.extend({
             "url"               : false,
             "consecutiveLimit"  : false,
             "loaderImagePath"   : "loading-128.png",
@@ -22,13 +22,12 @@
             "onUpload"          : false,
             "onReady"           : false,
             "onError"           : false,
-            "name"              : false,
+            "monitor"           : false,
+            "totalSizeToLoad"   : 0,
+            "totalSizeLoaded"   : 0
         }, options || {});
         // Bind the drag events
         this.bindDragEvents();
-        // For information that server sends
-        this.totalSizeToLoad = 0;
-        this.totalSizeLoaded = 0;
     };
 
     Dropify.prototype = {
@@ -70,14 +69,14 @@
             var withLoaderImage = withLoaderImage || false;
             var div = $("<div>");
             // Create the dialog window
-            var divWindow   = div.clone().attr({"id": "dragify-window"});
-            var divHeader   = div.clone().attr({"class": "dragify-window-header"}).appendTo(divWindow);
-            var divBody     = div.clone().attr({"class": "dragify-window-body"}).appendTo(divWindow);
-            var divFooter   = div.clone().attr({"class": "dragify-window-footer"}).appendTo(divWindow);
-            var divButton   = div.clone().attr({"class": "dragify-window-button"}).html("OK").appendTo(divFooter);
+            var divWindow   = div.clone().attr({"id": "dropify-window"});
+            var divHeader   = div.clone().attr({"class": "dropify-window-header"}).appendTo(divWindow);
+            var divBody     = div.clone().attr({"class": "dropify-window-body"}).appendTo(divWindow);
+            var divFooter   = div.clone().attr({"class": "dropify-window-footer"}).appendTo(divWindow);
+            var divButton   = div.clone().attr({"class": "dropify-window-button"}).html("OK").appendTo(divFooter);
             // Bind the button
             divButton.on("click", function() {
-                $("#dragify-window").remove();
+                $("#dropify-window").remove();
             })
             // Adds a spinner image
             if (withLoaderImage) {
@@ -109,16 +108,16 @@
          */
         onDownload: function (event) {
             // Calculate the progress
-            var completed = (Math.round((++this.totalSizeLoaded / this.totalSizeToLoad * 1000) / 10));
+            var completed = (Math.round((++this.settings.totalSizeLoaded / this.settings.totalSizeToLoad * 1000) / 10));
             // Show the progress
             this.onProgress("Uploading files... " + completed + "%");
 
         },
         onProgress: function (progress) {
-            if ($("#dragify-window").length < 1)
+            if ($("#dropify-window").length < 1)
                 this.createWindow(true);
             // Find the header and show the progress
-            $(".dragify-window-header").html(progress);
+            $(".dropify-window-header").html(progress);
         },
         /**
          * The default ready function, will
@@ -128,10 +127,10 @@
          * @returns
          */
         onReady: function () {
-            if ($("#dragify-window").length < 1)
+            if ($("#dropify-window").length < 1)
                 this.createWindow(false);
-            var divHeader   = $(".dragify-window-header");
-            var divBody     = $(".dragify-window-body");
+            var divHeader   = $(".dropify-window-header");
+            var divBody     = $(".dropify-window-body");
             // Set the new status
             divHeader.html("Upload finish!");
             divBody.children().remove();
@@ -143,10 +142,10 @@
          * @param   string  The error message
          */
         onError: function (message) {
-            if ($("#dragify-window").length < 1)
+            if ($("#dropify-window").length < 1)
                 this.createWindow(false);
-            var divHeader   = $(".dragify-window-header");
-            var divBody     = $(".dragify-window-body");
+            var divHeader   = $(".dropify-window-header");
+            var divBody     = $(".dropify-window-body");
             // Set the new status
             divHeader.html("Upload error");
             divBody.children().remove();
@@ -183,9 +182,10 @@
          * @param Element
          */
         dragEnter: function (event, elem) {
+            $('.dropify-highlight').removeClass('dropify-highlight');
             var elem = elem || false;
             if (elem !== false)
-                elem.addClass("highlight");
+                elem.addClass("dropify-highlight");
             this.onDrop(event);
         },
         /**
@@ -203,7 +203,7 @@
          dragOver: function (event, elem) {
              var elem = elem || false;
              if (elem !== false)
-                elem.removeClass("highlight");
+                elem.removeClass("dropify-highlight");
             this.onDrop(event);
          },
         /**
@@ -221,7 +221,7 @@
          dragLeave: function (event, elem) {
              var elem = elem || false;
              if (elem !== false)
-                elem.removeClass("highlight");
+                elem.removeClass("dropify-highlight");
             this.dragOver(event);
         },
         /**
@@ -239,7 +239,7 @@
              var elem   = elem || false;
              var upload = false;
              if (elem !== false) {
-                 elem.removeClass("highlight");
+                 elem.removeClass("dropify-highlight");
                  upload = true;
              }
              this.onDrop(event, upload);
@@ -319,7 +319,7 @@
             }
             // Set the download monitoring, either the
             // default or user overriden function.
-            self.totalSizeToLoad = packageSize;
+            self.settings.totalSizeToLoad = packageSize;
             xhr.onprogress = function (event) {
                 if (self.settings.onDownload === false) {
                     self.onDownload(event);
@@ -331,11 +331,10 @@
             // the user defined or the default function.
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
-                    var image = jQuery.parseJSON(xhr.responseText);
                     if (self.settings.onReady === false) {
                         self.onReady();
                     } else {
-                        self.settings.onReady();
+                        self.settings.onReady(xhr.responseText);
                     }
 
                 }
