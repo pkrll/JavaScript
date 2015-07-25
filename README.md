@@ -4,7 +4,7 @@ Here will be a collection of simple Javascript plugins and snippets. Nothing fan
 ### Dropify.js
 Add drag and drop-functionality to your HTML elements. The Dropify plugin also enables server uploads with AJAX.
 
-![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dragify/dragify-screenshot-1.png)
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot-1.png)
 
 ### ProgressBar.js
 Create HTML5 progress bar elements with the ProgressBar plugin, that will display the progress of tasks like uploads, downloads and other functions involving progress.
