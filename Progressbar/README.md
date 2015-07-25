@@ -1,6 +1,8 @@
 ## ProgressBar
 Create HTML5 progress bar elements with the ProgressBar plugin, that will display the progress of tasks like uploads, downloads and other functions involving progress.
 
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Progressbar/progressbar.png)
+
 #### Usage
 * Include the necessary files (including the jQuery 2 library).
 * Create the container for the progress bar, either dynamically or statically, as follows below:
@@ -17,8 +19,9 @@ Create HTML5 progress bar elements with the ProgressBar plugin, that will displa
     var progressBar = new ProgressBar({
         parentElement: $("#progress-bar-container")
     }, function () {
-        // Custom callback function when operation is done
-        this.setLabel("Custom done function goes here!");
+        // Custom callback function when operation is done.
+        this.setLabel("Custom label!");
+        // Do something else ...
     });
     // To set the progress, use:
     progressBar.setProgress(i);
@@ -27,8 +30,6 @@ Create HTML5 progress bar elements with the ProgressBar plugin, that will displa
     // To remove the progress bar, use:
     progressBar.remove();
 ```
-
-![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Progressbar/progressbar.png)
 
 ### Example usage
 See the example folder for an example on how to use it.
