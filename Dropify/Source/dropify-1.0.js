@@ -1,18 +1,17 @@
 /**
  * Javascript plugin
- * Dragify 1.0
+ * Dropify 1.1
  *
  * Ads drag and drop functionality to an HTML element,
  * and uploading files to the server.
  *
- * @version 1.0
+ * @version 1.1
  * @author Ardalan Samimi
  */
 (function($) {
 
-    Dropify = function (element, settings) {
-        this.element    = element;
-        this.monitor    = null;
+    var Dropify = function (element, options) {
+        this.element    = $(element);
         // Set the options
         this.settings = $.extend({
             "url"               : false,
@@ -23,7 +22,8 @@
             "onUpload"          : false,
             "onReady"           : false,
             "onError"           : false,
-        }, settings || {});
+            "name"              : false,
+        }, options || {});
         // Bind the drag events
         this.bindDragEvents();
         // For information that server sends
@@ -81,7 +81,7 @@
             })
             // Adds a spinner image
             if (withLoaderImage) {
-                var imgElement  = $("<img>").attr({"src": this.getSetting("loaderImagePath")}).appendTo(divBody);
+                var imgElement  = $("<img>").attr({"src": this.settings.loaderImagePath}).appendTo(divBody);
             }
             // Show the window
             divWindow.appendTo("body");
@@ -118,7 +118,7 @@
             if ($("#dragify-window").length < 1)
                 this.createWindow(true);
             // Find the header and show the progress
-            $(".dragify-window-header").html(progress);;
+            $(".dragify-window-header").html(progress);
         },
         /**
          * The default ready function, will
@@ -150,7 +150,7 @@
             // Set the new status
             divHeader.html("Upload error");
             divBody.children().remove();
-            divBody.html("An error has occurred while trying to upload images: " + message);
+            divBody.html("An error has occurred: " + message);
         },
         /**
          * Binds the elements and DOM drag events.
@@ -158,8 +158,8 @@
          *
          */
         bindDragEvents: function() {
-            self = this;
-            _elem = this.element;;
+            var self = this;
+            var _elem = this.element;;
             // Bind the elements drag events
             _elem.on("dragenter", function (event) { self.dragEnter(event, _elem); });
             _elem.on("dragover", function (event) { self.dragOver(event); });
@@ -182,10 +182,10 @@
          * @param eventObject
          * @param Element
          */
-        dragEnter: function (event, element) {
-            var element = element || false;
-            if (element !== false)
-                element.addClass("highlight");
+        dragEnter: function (event, elem) {
+            var elem = elem || false;
+            if (elem !== false)
+                elem.addClass("highlight");
             this.onDrop(event);
         },
         /**
@@ -200,10 +200,10 @@
          * @param eventObject
          * @param Element
          */
-         dragOver: function (event, element) {
-             var element = element || false;
-             if (element !== false)
-                element.removeClass("highlight");
+         dragOver: function (event, elem) {
+             var elem = elem || false;
+             if (elem !== false)
+                elem.removeClass("highlight");
             this.onDrop(event);
          },
         /**
@@ -218,10 +218,10 @@
          * @param eventObject
          * @param Element
          */
-         dragLeave: function (event, element) {
-             var element = element || false;
-             if (element !== false)
-                element.removeClass("highlight");
+         dragLeave: function (event, elem) {
+             var elem = elem || false;
+             if (elem !== false)
+                elem.removeClass("highlight");
             this.dragOver(event);
         },
         /**
@@ -235,14 +235,13 @@
          * @param eventObject
          * @param Element
          */
-         drop: function (event, element) {
-             var element = element || false,
-                  upload = false;
-             if (element !== false) {
-                 element.removeClass("highlight");
-                 upload = true
+         drop: function (event, elem) {
+             var elem   = elem || false;
+             var upload = false;
+             if (elem !== false) {
+                 elem.removeClass("highlight");
+                 upload = true;
              }
-
              this.onDrop(event, upload);
         },
         /**
@@ -271,19 +270,20 @@
                      //  anything other than the allowed extensions
                      // then abort the whole operation.
                      if (self.checkExtension(file.name) === false) {
-                         if (self.settings.onError === false)
-                            self.onError("You can only upload images.");
-                        else
-                            self.settings.onError("You can only upload images.");
+                         var onError = self.getSetting("onError");
+                         if (onError === false) {
+                            self.onError("Could not upload file " + file.name + ". File extension not allowed.");
+                        } else {
+                            onError("Could not upload file " + file.name + ". File extension not allowed.");
+                        }
                          error = true;
                          return false;
                      } else {
                          // Append files to formdata
                          fData.append('file'+x, file);
                      }
-                     // Check if there is a consecutive limit
-                     if (self.settings.consecutiveLimit !== false
-                         && self.settings.consecutiveLimit == x)
+                     // Stop if the limit has been reached
+                     if (self.settings.consecutiveLimit == (x+1))
                          return false;
                  });
                  if (error)
@@ -321,19 +321,23 @@
             // default or user overriden function.
             self.totalSizeToLoad = packageSize;
             xhr.onprogress = function (event) {
-                if (self.settings.onDownload === false)
+                if (self.settings.onDownload === false) {
                     self.onDownload(event);
-                else
+                } else {
                     self.settings.onDownload(event);
+                }
             }
             // When the image upload is done, run either
             // the user defined or the default function.
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
-                    if (self.settings.onReady === false)
+                    var image = jQuery.parseJSON(xhr.responseText);
+                    if (self.settings.onReady === false) {
                         self.onReady();
-                    else
+                    } else {
                         self.settings.onReady();
+                    }
+
                 }
             }
             // Make the request, only if an URL is set.
@@ -341,12 +345,18 @@
                 xhr.open('POST', self.settings.url);
         		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         		xhr.send(dataPackage);
+            } else {
+                if (self.settings.onError === false) {
+                    self.onError("No upload path set.");
+                } else {
+                    self.settings.onError("No upload path set.");
+                }
             }
          }
     };
 
     $.fn.dropify = function(options) {
         return new Dropify(this, options);
-    }
+    };
 
 })(jQuery);

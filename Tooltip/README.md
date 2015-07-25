@@ -1,38 +1,32 @@
-## Tooltip
-A simple jQuery plugin to add small tooltips below HTML form elements.
+# JavaScript
+Here will be a collection of simple Javascript plugins and snippets. Nothing fancy, just a coding sandbox, but that hopefully will be to use to someone, somewhere, somewhen.
 
-#### Usage
-* Create container div elements for each and every one of the form elements that are to be subject to the Tooltip plugin, with the class "tooltip-container":
-```html
-<div class="tooltip-container">
-   <input type="text" placeholder="Username" autofocus="autofocus" required="required" />
-</div>
-```
-* Do not forget to include the files and the jQuery library:
-```html
-  <script src="//code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="/path/to/tooltip-1.0.css" media="screen" charset="utf-8">
-  <script src="/path/to/tooltip-1.0.js" charset="utf-8"></script>
-```
-* Call the plugin:
-```js
-var tooltip = new Tooltip({
-   "label": "Please fill out this field",
-   "element": $(element)
-}, true);
-```
-#### Options
-```js
-Tooltip({
-   "label": "Please fill out this field", // Required
-   "fadeOut": 5000, // Optional, sets the number of milliseconds the tooltip should stay on screen
-   "element": $(element) // Required: The tooltip-container
-}, true|false); // A true value will remove all tooltips on screen when executing
-```
+### Dragify.js
+Add drag and drop-functionality to your HTML elements. The Dragify plugin also enables server uploads with AJAX.
+
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dragify/dragify-screenshot-1.png)
+
+### ProgressBar.js
+Create HTML5 progress bar elements with the ProgressBar plugin, that will display the progress of tasks like uploads, downloads and other functions involving progress.
+
+### Tooltip.js
+Create simple tooltips below HTML form elements.
+
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Tooltip/tooltip10.png)
+<<<<<<< Updated upstream
 ### Example usage
 See the example folder for an example on how to use it.
 ### More to come
 This is a work in progress.
 ### Author
 * Tooltip was created by Ardalan Samimi.
+=======
+
+### More to come?
+Perhaps. Maybe. Probably. Or not.
+
+### Author
+* Ardalan Samimi
+
+http://pkrll.github.io/JavaScript/
+>>>>>>> Stashed changes

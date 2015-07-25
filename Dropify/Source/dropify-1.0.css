@@ -1,4 +1,4 @@
-#dragify-window {
+#dropify-window {
     background:     #FFFFFF;
     border:         1px solid #CCCCCC;
     border-radius:  5px;
@@ -10,7 +10,7 @@
     width:          300px;
 }
 
-.dragify-window-header {
+.dropify-window-header {
     color:          #222222;
     font-family:    'Raleway', sans-serif;
     font-size:      19px;
@@ -18,25 +18,25 @@
     text-align:     center;
 }
 
-.dragify-window-body {
+.dropify-window-body {
     color:      #333333;
     font-size:  13px;
     padding:    20px 30px 30px 30px;
     text-align: center;
 }
 
-.dragify-window-body > img {
+.dropify-window-body > img {
     width:      64px;
 }
 
-.dragify-window-footer {
+.dropify-window-footer {
     background:     #666;
     border-radius:  0 0 5px 5px;
     color:          #FFFFFF;
     text-align:     right;
 }
 
-.dragify-window-button {
+.dropify-window-button {
     background:     #119955;
     border-radius:  0 0 5px 0px;
     cursor:         pointer;
@@ -47,10 +47,10 @@
     width:          20%;
 }
 
-.dragify-window-button:hover {
+.dropify-window-button:hover {
     background: #11BB55;
 }
 
-.dragify-window-button:active {
+.dropify-window-button:active {
     box-shadow: inset 1px 1px 10px #119955;
 }

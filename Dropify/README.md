@@ -1,12 +1,12 @@
-## Dragify
-Add drag and drop-functionality to your HTML elements. The Dragify plugin also enables server uploads with AJAX.
+## Dropify
+Add drag and drop-functionality to your HTML elements. The Dropify plugin also enables server uploads with AJAX.
 
 ### Usage
 * Include the files and the jQuery library:
 ```html
   <script src="//code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="/path/to/dragify-1.0.css" media="screen" charset="utf-8">
-  <script src="/path/to/dragify-1.0.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/path/to/dropify-1.0.css" media="screen" charset="utf-8">
+  <script src="/path/to/dropify-1.0.js" charset="utf-8"></script>
 ```
 * Use the plugin as follows. The upload url must be set in order for the upload to work.
 ```js
@@ -16,12 +16,21 @@ $(".dragAndDropElement").dropify({
 ```
 * Drag the file(s) over the drop zone, and release.
 
+<<<<<<< HEAD:Dropify/README.md
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot.png)
+
+* Let the upload commence.
+
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot-1.png)
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot-2.png)
+=======
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dragify/dragify-screenshot.png)
 
 * Let the upload commence.
  
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dragify/dragify-screenshot-1.png)
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dragify/dragify-screenshot-2.png)
+>>>>>>> origin/master:Dragify/README.md
 #### Options
 ```js
 .dropify({
@@ -36,4 +45,8 @@ $(".dragAndDropElement").dropify({
 });
 ```
 ### Author
+<<<<<<< HEAD:Dropify/README.md
+* Dropify was created by Ardalan Samimi.
+=======
 * Dragify was created by Ardalan Samimi.
+>>>>>>> origin/master:Dragify/README.md
