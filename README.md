@@ -1,8 +1,8 @@
 # JavaScript
 Here will be a collection of simple Javascript plugins and snippets. Nothing fancy, just a coding sandbox, but that hopefully will be to use to someone, somewhere, somewhen.
 
-### Dragify.js
-Add drag and drop-functionality to your HTML elements. The Dragify plugin also enables server uploads with AJAX.
+### Dropify.js
+Add drag and drop-functionality to your HTML elements. The Dropify plugin also enables server uploads with AJAX.
 
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dragify/dragify-screenshot-1.png)
 

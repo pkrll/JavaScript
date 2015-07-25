@@ -16,21 +16,13 @@ $(".dragAndDropElement").dropify({
 ```
 * Drag the file(s) over the drop zone, and release.
 
-<<<<<<< HEAD:Dropify/README.md
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot.png)
 
 * Let the upload commence.
 
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot-1.png)
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot-2.png)
-=======
-![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dragify/dragify-screenshot.png)
 
-* Let the upload commence.
- 
-![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dragify/dragify-screenshot-1.png)
-![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dragify/dragify-screenshot-2.png)
->>>>>>> origin/master:Dragify/README.md
 #### Options
 ```js
 .dropify({
@@ -45,8 +37,4 @@ $(".dragAndDropElement").dropify({
 });
 ```
 ### Author
-<<<<<<< HEAD:Dropify/README.md
 * Dropify was created by Ardalan Samimi.
-=======
-* Dragify was created by Ardalan Samimi.
->>>>>>> origin/master:Dragify/README.md
