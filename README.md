@@ -1,17 +1,17 @@
 # JavaScript
 Here will be a collection of simple Javascript plugins and snippets. Nothing fancy, just a coding sandbox, but that hopefully will be to use to someone, somewhere, somewhen.
 
-### Dropify.js
+### [Dropify.js](https://github.com/pkrll/JavaScript/tree/master/Dropify)
 Add drag and drop-functionality to your HTML elements. The Dropify plugin also enables server uploads with AJAX.
 
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot-1.png)
 
-### ProgressBar.js
+### [ProgressBar.js](https://github.com/pkrll/JavaScript/tree/master/Progressbar)
 Create HTML5 progress bar elements with the ProgressBar plugin, that will display the progress of tasks like uploads, downloads and other functions involving progress.
 
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Progressbar/progressbar.png)
 
-### Tooltip.js
+### [Tooltip.js](https://github.com/pkrll/JavaScript/tree/master/Tooltip)
 Create simple tooltips below HTML form elements.
 
 ![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Tooltip/tooltip10.png)
