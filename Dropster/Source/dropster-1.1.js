@@ -1,6 +1,6 @@
 /**
  * Javascript plugin
- * Dropify 1.1
+ * Dropster 1.1
  *
  * Adds drag and drop functionality to an HTML element,
  * and uploading files to the server.
@@ -10,7 +10,7 @@
  */
 (function($) {
 
-    var Dropify = function (element, options) {
+    var Dropster = function (element, options) {
         this.element    = $(element);
         // Set the options
         this.settings   = $.extend({
@@ -30,7 +30,7 @@
         this.bindDragEvents();
     };
 
-    Dropify.prototype = {
+    Dropster.prototype = {
         /**
          * Returns a value from the settings collection.
          *
@@ -66,14 +66,14 @@
             var withLoaderImage = withLoaderImage || false;
             var div = $("<div>");
             // Create the dialog window
-            var divWindow   = div.clone().attr({"id": "dropify-window"});
-            var divHeader   = div.clone().attr({"class": "dropify-window-header"}).appendTo(divWindow);
-            var divBody     = div.clone().attr({"class": "dropify-window-body"}).appendTo(divWindow);
-            var divFooter   = div.clone().attr({"class": "dropify-window-footer"}).appendTo(divWindow);
-            var divButton   = div.clone().attr({"class": "dropify-window-button"}).html("OK").appendTo(divFooter);
+            var divWindow   = div.clone().attr({"id": "dropster-window"});
+            var divHeader   = div.clone().attr({"class": "dropster-window-header"}).appendTo(divWindow);
+            var divBody     = div.clone().attr({"class": "dropster-window-body"}).appendTo(divWindow);
+            var divFooter   = div.clone().attr({"class": "dropster-window-footer"}).appendTo(divWindow);
+            var divButton   = div.clone().attr({"class": "dropster-window-button"}).html("OK").appendTo(divFooter);
             // Bind the button
             divButton.on("click", function() {
-                $("#dropify-window").remove();
+                $("#dropster-window").remove();
             })
             // Adds a spinner image
             if (withLoaderImage) {
@@ -117,10 +117,10 @@
          * @param   string
          */
         onProgress: function (progress) {
-            if ($("#dropify-window").length < 1)
+            if ($("#dropster-window").length < 1)
                 this.createWindow(true);
             // Find the header and show the progress
-            $(".dropify-window-header").html(progress);
+            $(".dropster-window-header").html(progress);
         },
         /**
          * The default ready function, will
@@ -130,10 +130,10 @@
          * @returns
          */
         onReady: function () {
-            if ($("#dropify-window").length < 1)
+            if ($("#dropster-window").length < 1)
                 this.createWindow(false);
-            var divHeader   = $(".dropify-window-header");
-            var divBody     = $(".dropify-window-body");
+            var divHeader   = $(".dropster-window-header");
+            var divBody     = $(".dropster-window-body");
             // Set the new status
             divHeader.html("Upload finish!");
             divBody.children().remove();
@@ -145,10 +145,10 @@
          * @param   string  The error message
          */
         onError: function (message) {
-            if ($("#dropify-window").length < 1)
+            if ($("#dropster-window").length < 1)
                 this.createWindow(false);
-            var divHeader   = $(".dropify-window-header");
-            var divBody     = $(".dropify-window-body");
+            var divHeader   = $(".dropster-window-header");
+            var divBody     = $(".dropster-window-body");
             // Set the new status
             divHeader.html("Upload error");
             divBody.children().remove();
@@ -181,10 +181,10 @@
          * @param   Element
          */
         dragEnter: function (event, elem) {
-            $('.dropify-highlight').removeClass('dropify-highlight');
+            $('.dropster-highlight').removeClass('dropster-highlight');
             var elem = elem || false;
             if (elem !== false)
-                elem.addClass("dropify-highlight");
+                elem.addClass("dropster-highlight");
             this.onDrop(event);
         },
         /**
@@ -201,7 +201,7 @@
          dragOver: function (event, elem) {
              var elem = elem || false;
              if (elem !== false)
-                elem.removeClass("dropify-highlight");
+                elem.removeClass("dropster-highlight");
             this.onDrop(event);
          },
         /**
@@ -216,7 +216,7 @@
          dragLeave: function (event, elem) {
              var elem = elem || false;
              if (elem !== false)
-                elem.removeClass("dropify-highlight");
+                elem.removeClass("dropster-highlight");
             this.dragOver(event);
         },
         /**
@@ -230,7 +230,7 @@
              var elem   = elem || false;
              var upload = false;
              if (elem !== false) {
-                 elem.removeClass("dropify-highlight");
+                 elem.removeClass("dropster-highlight");
                  upload = true;
              }
              this.onDrop(event, upload);
@@ -345,8 +345,8 @@
          }
     };
 
-    $.fn.dropify = function(options) {
-        return new Dropify(this, options);
+    $.fn.dropster = function(options) {
+        return new Dropster(this, options);
     };
 
 })(jQuery);

@@ -1,31 +1,31 @@
-## Dropify
-Add drag and drop-functionality to your HTML elements. The Dropify plugin also enables server uploads with AJAX.
+## Dropster
+Add drag and drop-functionality to your HTML elements. The Dropster plugin also enables server uploads with AJAX.
 
 ### Usage
 * Include the files and the jQuery library:
 ```html
   <script src="//code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="/path/to/dropify-1.1.css" media="screen" charset="utf-8">
-  <script src="/path/to/dropify-1.1.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/path/to/dropster-1.1.css" media="screen" charset="utf-8">
+  <script src="/path/to/dropster-1.1.js" charset="utf-8"></script>
 ```
 * Use the plugin as follows. The upload url must be set in order for the upload to work.
 ```js
-$(".dragAndDropElement").dropify({
+$(".dragAndDropElement").dropster({
    "url": "/path/to/upload.php"
 });
 ```
 * Drag the file(s) over the drop zone, and release.
 
-![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot.png)
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropster/screenshot.png)
 
 * Let the upload commence.
 
-![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot-1.png)
-![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropify/dropify-screenshot-2.png)
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropster/screenshot-1.png)
+![Screenshot](https://github.com/pkrll/JavaScript/blob/master/Dropster/screenshot-2.png)
 
 #### Options
 ```js
-.dropify({
+.dropster({
        "url"                : "/path/to/server/upload/",
        "consecutiveLimit"   : 2,
        "loaderImagePath"    : "/path/to/image.png",
@@ -48,13 +48,13 @@ $(".dragAndDropElement").dropify({
 * `totalSizeLoaded`: Number of files that as of accessing this variable has been uploaded. (**read-only**).
 
 #### Customization
-* Dropify's default progress monitoring can easily be overridden and tailored to fit your exact needs. Below follows an example, where the [ProgressBar plugin](https://github.com/pkrll/JavaScript/tree/master/Progressbar) is used instead of the default dialog window.
+* Dropster's default progress monitoring can easily be overridden and tailored to fit your exact needs. Below follows an example, where the [ProgressBar plugin](https://github.com/pkrll/JavaScript/tree/master/Progressbar) is used instead of the default dialog window.
 ```js
     /**
-     * Add the Dropify plugin to the element with
+     * Add the Dropster plugin to the element with
      * id targetArea, with customized settings.
      */
-    $("#targetArea").dropify({
+    $("#targetArea").dropster({
        url: "/upload/image",
        consecutiveLimit: 5,
        extensions: []
@@ -71,7 +71,7 @@ $(".dragAndDropElement").dropify({
     });
 
     /**
-     * Override Dropify's default onUpload function.
+     * Override Dropster's default onUpload function.
      *
      * @param   progressEvent
      */
@@ -83,7 +83,7 @@ $(".dragAndDropElement").dropify({
         // of declaring a global variable for it.
         var self = this;
         // Create the progress bar object, and
-        // connect it to the Dropify plugin, if
+        // connect it to the Dropster plugin, if
         // it already does not exist. But keep it
         // inside a conditional statement, so that
         // we do not create loads of progress bars.
@@ -109,7 +109,7 @@ $(".dragAndDropElement").dropify({
     }
 
     /**
-     * Override Dropify's default function onDownload function,
+     * Override Dropster's default function onDownload function,
      * for when the server sends information back.
      *
      * @param   progressEvent
@@ -130,4 +130,4 @@ $(".dragAndDropElement").dropify({
     }
 ```
 ### Author
-* Dropify was created by Ardalan Samimi.
+* Dropster was created by Ardalan Samimi.

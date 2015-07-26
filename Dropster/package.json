@@ -1,0 +1,19 @@
+{
+  "name": "dropster",
+  "version": "1.1.1",
+  "description": "Drag and drop file upload",
+  "main": "source/dropster-1.1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pkrll/JavaScript/tree/master/Dropster"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery"
+  ],
+  "author": "Ardalan Samimi",
+  "license": "MIT"
+}
