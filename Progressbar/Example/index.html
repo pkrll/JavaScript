@@ -4,9 +4,33 @@
     <meta charset="utf-8">
 	<title>ProgressBar Plugin</title>
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="progressBar-1.0.js"></script>
-	<script type="text/javascript" src="main.js"></script>
-	<link rel="stylesheet" href="progressBar-1.0.css" type="text/css" media="screen">
+	<script type="text/javascript" src="progressbar-1.1.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function() {
+        	$("span.create").click(function() {
+        		// Create the Progress bar object and
+        		// set the parent element in which the
+        		// the progress bar should appear.
+        		statusbar = new ProgressBar({
+        			color: '#0A0',
+        			parentElement: $("#progress-bar-container")
+        		}, function () {
+        			// Custom callback function, sets
+        			// the label
+        			this.setLabel("Custom done function!");
+        		});
+        	});
+
+        	$("span.run").click(function() {
+        		for (var i = 0; i<101; i++) {
+        			statusbar.setProgress(i);
+        		}
+
+        	});
+
+        });
+    </script>
+	<link rel="stylesheet" href="progressbar-1.1.css" type="text/css" media="screen">
 	<style type="text/css">
 		div#control-panel {
 			margin:20px auto;

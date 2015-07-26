@@ -4,10 +4,44 @@
         <meta charset="utf-8">
         <title>Tooltip 1.0</title>
         <link rel="stylesheet" href="example.css" media="screen" charset="utf-8">
-        <link rel="stylesheet" href="../Source/tooltip-1.0.css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="../Source/tooltip-1.1.css" media="screen" charset="utf-8">
         <script src="//code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
-        <script src="../Source/tooltip-1.0.js" charset="utf-8"></script>
-        <script src="example.js" charset="utf-8"></script>
+        <script src="../Source/tooltip-1.1.js" charset="utf-8"></script>
+        <script>
+            $(document).ready(function() {
+                $("input[type=submit]").click(function (event) {
+                    // Prevent the submit for now.
+                    event.preventDefault();
+                    var emptyElements = [];
+                    // Gather all the elements marked with
+                    // the 'required' attribute and check.
+                    var parent = $(this).parent();
+                    var requiredElements = parent.find("[required]");
+                    $.each(requiredElements, function(index, element) {
+                        if ($(element).val() === '')
+                            emptyElements.push($(element));
+                    });
+                    // If one of the required elements is
+                    // empty throw an error and cancel the
+                    // form submit.
+                    if (emptyElements.length > 0) {
+                        var tooltip = new Tooltip({
+                            "label": "Please fill out this field",
+                            "fadeOut": 1000,
+                            "element": emptyElements[0].parent()
+                        }, true);
+                        // No need to continue if we have
+                        // found an error.
+                        return false;
+                    } else {
+                        // If all checks out, submit the
+                        // damned form, already!
+                        parent.submit();
+                    }
+                });
+
+            });
+        </script>
     </head>
     <body style="margin:0">
 

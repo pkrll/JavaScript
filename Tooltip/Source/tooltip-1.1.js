@@ -5,11 +5,10 @@
  * Add small tooltips below
  * HTML elements.
  *
- * @version 1.0
+ * @version 1.1
  * @author Ardalan Samimi
  */
 (function ($) {
-
     Tooltip = function (settings, reset) {
         // Check if object was called
         // with the 'new' keyword.
@@ -56,10 +55,9 @@
             // the user remove it.
             if ($.isNumeric(this.settings.fadeOut))
                 container.delay(this.settings.fadeOut).fadeOut("slow");
-            else
-                label.click(function () {
-                    $(this).parent().remove();
-                });
+            label.click(function () {
+                $(this).parent().remove();
+            });
         },
         // If reset option is on, then all the other
         // tooltips should be removed.
