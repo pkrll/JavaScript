@@ -32,8 +32,7 @@
 
     Dropify.prototype = {
         /**
-         * Returns a key from the
-         * settings collection.
+         * Returns a value from the settings collection.
          *
          * @param   string  Name of setting
          * @returns mixed
@@ -42,13 +41,12 @@
             return this.settings[key];
         },
         /**
-         * Check the extension of the file(s)
-         * to be uploaded, comparing to the
-         * array of file extensions set in
-         * settings.extensions.
+         * Check the extension of the file(s) to be uploaded,
+         * comparing to the array of file extensions set in
+         * the array extensions.
          *
          * @param   string  Name of file
-         * @returns bool
+         * @returns   bool
          */
         checkExtension: function (fileName) {
             extension = fileName.split('.').pop().toLowerCase();
@@ -59,9 +57,8 @@
             return false;
         },
         /**
-         * Creates a dialog window, if the
-         * default progress and on ready
-         * functions are not overriden.
+         * Creates a dialog window, for the default progress
+         * monitoring event.
          *
          * @param   bool    If a spinner should be shown.
          */
@@ -86,11 +83,11 @@
             divWindow.appendTo("body");
         },
         /**
-         * Default monitoring function for
-         * uploading to the server, will
-         * be called if not overriden.
+         * Default monitoring function for uploading to the
+         * server, will be called if not overriden. Will be
+         * called if not overriden.
          *
-         * @param   eventData   The eventData object from xhr.upload.onprogress
+         * @param   progressEvent   The progressEvent object from XMLHttpRequest upload.onprogress
          */
         onUpload: function (event) {
             // Calculate the progress
@@ -101,10 +98,11 @@
             this.onProgress("Uploading files... " + completed + "%");
         },
         /**
-         * Default monitoring function for
-         * downloading from the server.
+         * Default monitoring function for downloading and
+         * getting response from the server. Will be called
+         * if not overriden.
          *
-         * @param   eventData   The eventData object from xhr.onprogress
+         * @param   progressEvent   The progressEvent object from XMLHttpRequest onprogress
          */
         onDownload: function (event) {
             // Calculate the progress
@@ -113,6 +111,11 @@
             this.onProgress("Uploading files... " + completed + "%");
 
         },
+        /**
+         * Outputs the progress.
+         *
+         * @param   string
+         */
         onProgress: function (progress) {
             if ($("#dropify-window").length < 1)
                 this.createWindow(true);
@@ -137,7 +140,7 @@
             divBody.html("The images have been successfully uploaded.");
         },
         /**
-         * Called upon error. Can be ovverriden.
+         * Called when encountering error. Can be ovverriden.
          *
          * @param   string  The error message
          */
@@ -164,22 +167,18 @@
             _elem.on("dragover", function (event) { self.dragOver(event); });
             _elem.on("drop", function (event) { self.drop(event, _elem); });
             _elem.on("dragleave", function (event) { self.dragLeave (event); });
-            // Bind the drag events to the DOM.
-            // This will make sure the highlights
-            // dissapear on the valid drop targets
-            // when the dragging exists those areas.
+            // Bind the drag events to the DOM, to
+            // make sure the highlighting works.
             $(document).on("dragenter", function (event) { self.dragEnter(event); });
             $(document).on("drop", function (event) { self.drop(event); });
             $(document).on("dragover", function (event) { self.dragOver(event, _elem); });
         },
         /**
-         * This function will fire when a
-         * dragged object enters the valid
-         * drop zone. The drop target will
-         * get highlighted through css.
+         * Watches for when a dragged object enters
+         * a valid drop zone.
          *
-         * @param eventObject
-         * @param Element
+         * @param   eventObject
+         * @param   Element
          */
         dragEnter: function (event, elem) {
             $('.dropify-highlight').removeClass('dropify-highlight');
@@ -189,13 +188,12 @@
             this.onDrop(event);
         },
         /**
-         * This function will fire when an
-         * object is being dragged over the
-         * valid drop zone. If an element is
-         * provided, it will be stripped of
-         * the class highlight. This is for
-         * when the drag leaves the valid drop
-         * target and enters the document body.
+         * Watches for when an object is being
+         * dragged over the valid drop zone. If
+         * an element is provided, it will be
+         * stripped of the highlighting. This
+         * is for when the dragged object leaves
+         * the drop target.
          *
          * @param eventObject
          * @param Element
@@ -207,13 +205,10 @@
             this.onDrop(event);
          },
         /**
-         * This function will fire when an
-         * object is being dragged over the
-         * valid drop zone. If an element is
+         * Watches for when an object leaves
+         * the drop area. If an element is
          * provided, it will be stripped of
-         * the class highlight. This is for
-         * when the drag leaves the valid drop
-         * target and enters the document body.
+         * the highlighting.
          *
          * @param eventObject
          * @param Element
@@ -225,12 +220,8 @@
             this.dragOver(event);
         },
         /**
-         * This function will fire when a
-         * dragged object is dropped on a
-         * valid target zone. It will call
-         * the function dragAndDrop with
-         * the drop targets type (cover or
-         * slideshow) as one of the params.
+         * Watches for when a dragged object
+         * is dropped on a valid drop zone.
          *
          * @param eventObject
          * @param Element
@@ -247,10 +238,10 @@
         /**
          * Determines if the drag/drop was valid
          * and creates a formData object to send
-         * to the method Send().
+         * to the function sendDrop.
          *
-         * @param eventTarget   To stop default actions
-         * @param bool          Is Upload?
+         * @param eventObject   To stop default actions
+         * @param        bool   Is upload, yes?
          */
          onDrop: function (event, upload) {
              var upload = upload || false;
