@@ -11,12 +11,10 @@
  * @author Ardalan Samimi
  */
 (function($) {
-
     /**
     * Initialize the ProgressBar object
     * with option to change the default
-    * settings such as color of bar and
-    * the parent.
+    * settings.
     *
     * @param Object Settings parameters
     * @param Function A callback function
@@ -34,25 +32,20 @@
 			// either when the creating the object
 			// or by calling the set-functions.
 			this.settings = $.extend({
-				"color": '#0F0',
 				"parentElement": false,
 				"name": false
 			}, settings || {});
 			// Create the bar if a parent
 			// element is set.
-			// if (this.settings.parentElement !== false) {
-			// 	this.createBar();
-			// };
+			if (this.settings.parentElement !== false) {
+				this.createBar();
+			};
 		} else {
 			return new ProgressBar (settings);
 		}
 	};
 
 	ProgressBar.prototype = {
-		// Set the color of the bar
-		setColor: function (color) {
-			this.settings.color = color;
-		},
 		// Set which element to house
 		// the progress bar element
 		setElement: function (element) {
